@@ -1,0 +1,36 @@
+databaseChangeLog:
+  - changeSet:
+      id: 001-create-users-table
+      author: adelyarr
+      changes:
+        - sqlFile:
+            path: 001-create-users-table.sql
+            relativeToChangelogFile: true
+  - changeSet:
+      id: 002-create-rss_sources-table
+      author: adelyarr
+      changes:
+        - sqlFile:
+            path: 002-create-rss_sources-table.sql
+            relativeToChangelogFile: true
+  - changeSet:
+      id: 003-create-sessions-table
+      author: adelyarr
+      changes:
+        - sqlFile:
+            path: 003-create-sessions-table.sql
+            relativeToChangelogFile: true
+  - changeSet:
+      id: 004-create-rss_posts-table
+      author: adelyarr
+      changes:
+        - sqlFile:
+            path: 004-create-rss_posts-table.sql
+            relativeToChangelogFile: true
+  - changeSet:
+      id: 005-create-users_rss_sources-table
+      author: adelyarr
+      changes:
+        - sqlFile:
+            path: 005-create-users_rss_sources-table.sql
+            relativeToChangelogFile: true

@@ -1,0 +1,48 @@
+server:
+  servlet:
+    context-path: /semester
+
+spring:
+  application:
+    name: semester
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/${DB_NAME}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+
+  liquibase:
+    change-log: classpath:/db/changelog/changelog-master.yaml
+
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+  session:
+    store-type: redis
+    timeout: 30m
+    redis:
+      namespace: semester
+
+    data:
+      redis:
+        host: ${REDIS_HOST:localhost}
+        port: ${REDIS_PORT:6379}
+        password: ${REDIS_PASSWORD:}
+
+logging:
+  level:
+    org.springframework.security: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.hibernate.orm.jdbc.bind: TRACE
+    io.github.adelyarr.semester: DEBUG
+
+app:
+  base-url: http://localhost:8080/semester
+
+oauth2:
+  client-id: ${GOOGLE_CLIENT_ID}
+  client-secret: ${GOOGLE_CLIENT_SECRET}
+  redirect-uri: http://localhost:8080/semester/login/oauth2/code/google
