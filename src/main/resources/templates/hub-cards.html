@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hub карты</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div th:replace="~{header :: header}"></div>
+
+    <script th:src="@{/js/hub-card.js}"></script>
+
+    <div>
+        <form method="get" th:action="@{/training-start}">
+            <input type="hidden" name="card_group_id" th:value="${card_group_id}">
+            <button type="submit">Тренировать</button>
+        </form>
+
+        <div th:if="${#objects.nullSafe(#ctx.getVariable('trainingService').hasActiveTrainingSession(#httpServletRequest, card_group_id), false)}">
+            <form method="get" th:action="@{/training-continue}">
+                <input type="hidden" name="card_group_id" th:value="${card_group_id}">
+                <button type="submit">Продолжить</button>
+            </form>
+        </div>
+
+        <form method="post" th:action="@{/training-reset}">
+            <input type="hidden" name="card_group_id" th:value="${card_group_id}">
+            <button type="submit" onclick="return confirm('Вы уверены, что хотите сбросить время карточек?')">Сбросить</button>
+        </form>
+    </div>
+
+    <button type="button" id="show_button">Показать карты</button>
+
+    <div id="cards" style="display: none;">
+        <div th:each="card : ${cards}" th:replace="~{hub-card :: hub-card(card=${card})}"></div>
+    </div>
+</body>
+</html>

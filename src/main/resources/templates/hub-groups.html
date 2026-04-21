@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hub колоды</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div th:replace="~{header :: header}"></div>
+
+    <div class="card_groups">
+        <div th:each="card_group : ${card_groups}">
+            <div th:replace="~{hub-card-group :: hub-card-group(card_group=${card_group})}"></div>
+        </div>
+    </div>
+
+    <div th:replace="~{pagination :: pagination(page=${page}, total_pages=${total_pages}, input_text=${input_text})}"></div>
+</body>
+</html>

@@ -5,7 +5,8 @@ import io.github.adelyarr.semester.model.LoginForm;
 import io.github.adelyarr.semester.model.RegistrationForm;
 import io.github.adelyarr.semester.service.RegisterService;
 import jakarta.validation.Valid;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,7 +19,8 @@ import static io.github.adelyarr.semester.common.ViewConstants.*;
 import static io.github.adelyarr.semester.common.ViewConstants.REGISTER_VIEW;
 
 @Controller
-@AllArgsConstructor
+@RequiredArgsConstructor
+@Slf4j
 public class AuthController {
 
     private final RegisterService registerService;
@@ -27,6 +29,7 @@ public class AuthController {
     public String getLogin(@RequestParam(value = "error", required = false) String error,
                            Model model) {
         if (error != null) {
+            log.warn("Ошибка входа в систему: {}", error);
             model.addAttribute("error", "Неверная почта или пароль");
         }
 
@@ -43,12 +46,19 @@ public class AuthController {
     @PostMapping("/register")
     public String register(@Valid @ModelAttribute("form") RegistrationForm form,
                            BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) return REGISTER_VIEW;
+        if (bindingResult.hasErrors()) {
+            log.warn("Форма регистрации содержит ошибки валидации: {}", bindingResult.getAllErrors());
+            return REGISTER_VIEW;
+        }
 
         try {
             Long userId = registerService.register(form);
-            return "redirect:/" + HUB_VIEW;
+
+            log.info("Пользователь успешно зарегистрирован с ID: {} и email: {}", userId, form.getEmail());
+
+            return "redirect:/" + HUB_GROUPS_VIEW;
         } catch (EmailTakenException e) {
+            log.warn("Ошибка регистрации - email уже занят: {}", form.getEmail());
             bindingResult.rejectValue("email", "email.taken", e.getMessage());
             return REGISTER_VIEW;
         }

@@ -7,30 +7,58 @@ databaseChangeLog:
             path: 001-create-users-table.sql
             relativeToChangelogFile: true
   - changeSet:
-      id: 002-create-rss_sources-table
+      id: 002-create-card_groups-table
       author: adelyarr
       changes:
         - sqlFile:
-            path: 002-create-rss_sources-table.sql
+            path: 002-create-card_groups-table.sql
             relativeToChangelogFile: true
   - changeSet:
-      id: 003-create-sessions-table
+      id: 003-create-cards-table
       author: adelyarr
       changes:
         - sqlFile:
-            path: 003-create-sessions-table.sql
+            path: 003-create-cards-table.sql
             relativeToChangelogFile: true
   - changeSet:
-      id: 004-create-rss_posts-table
+      id: 004-create-tags-table
       author: adelyarr
       changes:
         - sqlFile:
-            path: 004-create-rss_posts-table.sql
+            path: 004-create-tags-table.sql
             relativeToChangelogFile: true
   - changeSet:
-      id: 005-create-users_rss_sources-table
+      id: 005-create-user_card_progress-table
       author: adelyarr
       changes:
         - sqlFile:
-            path: 005-create-users_rss_sources-table.sql
+            path: 005-create-user_card_progress-table.sql
+            relativeToChangelogFile: true
+  - changeSet:
+      id: 006-create-user_card_settings-table
+      author: adelyarr
+      changes:
+        - sqlFile:
+            path: 006-create-user_card_settings-table.sql
+            relativeToChangelogFile: true
+  - changeSet:
+      id: 007-create-card_tags-table
+      author: adelyarr
+      changes:
+        - sqlFile:
+            path: 007-create-card_tags-table.sql
+            relativeToChangelogFile: true
+  - changeSet:
+      id: 008-create-training_sessions-table
+      author: adelyarr
+      changes:
+        - sqlFile:
+            path: 008-create-training_sessions-table.sql
+            relativeToChangelogFile: true
+  - changeSet:
+      id: 009-create-training_session_cards-table
+      author: adelyarr
+      changes:
+        - sqlFile:
+            path: 009-create-training_session_cards-table.sql
             relativeToChangelogFile: true

@@ -29,7 +29,7 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/register", "/login", "/css/**", "/js/**", "/images/**", "/error").permitAll()
                         .requestMatchers("/oauth2/**", "/login/oauth2/**").permitAll()
-                        .requestMatchers("/hub").hasRole("USER")
+                        .requestMatchers("/hub/**").hasRole("USER")
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
@@ -37,7 +37,7 @@ public class WebSecurityConfig {
                         .loginProcessingUrl("/login")
                         .usernameParameter("email")
                         .passwordParameter("password")
-                        .defaultSuccessUrl("/hub", true)
+                        .defaultSuccessUrl("/hub/groups", true)
                         .failureUrl("/login?error=true")
                         .permitAll()
                 )

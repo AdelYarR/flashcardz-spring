@@ -3,6 +3,8 @@ package io.github.adelyarr.semester.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.Objects;
+
 @Entity
 @Table(name = "users")
 @NoArgsConstructor
@@ -11,7 +13,8 @@ import lombok.*;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "users_seq")
+    @SequenceGenerator(name = "users_seq", sequenceName = "users_sequence")
     private Long id;
 
     @Column(name = "email", nullable = false, unique = true)
@@ -48,6 +51,6 @@ public class User {
 
     @Override
     public int hashCode() {
-        return getClass().hashCode();
+        return Objects.hashCode(id);
     }
 }

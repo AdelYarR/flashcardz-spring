@@ -1,17 +1,17 @@
-create table users (
-    id bigserial primary key,
-    email varchar(255) not null unique,
-    hashed_password text,
-    auth_type varchar(25) not null,
-    oauth2_id text unique,
+CREATE TABLE users (
+    id BIGSERIAL PRIMARY KEY,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    hashed_password TEXT,
+    auth_type VARCHAR(25) NOT NULL,
+    oauth2_id TEXT UNIQUE,
 
-    constraint auth_type_valid check (auth_type in ('LOCAL', 'GOOGLE')),
+    CONSTRAINT auth_type_valid CHECK (auth_type IN ('LOCAL', 'GOOGLE')),
 
-    constraint must_have_password check (
-    auth_type != 'LOCAL' or (hashed_password is not null)
+    CONSTRAINT must_have_password CHECK (
+    auth_type != 'LOCAL' OR (hashed_password IS NOT NULL)
     ),
 
-    constraint must_have_oauth2_id check (
-    auth_type = 'LOCAL' or oauth2_id is not null
+    CONSTRAINT must_have_oauth2_id CHECK (
+    auth_type = 'LOCAL' OR oauth2_id IS NOT NULL
     )
 );

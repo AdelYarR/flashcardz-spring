@@ -7,33 +7,33 @@
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
-<div class="container">
-    <h1>Вход</h1>
+    <div class="container">
+        <h1>Вход</h1>
 
-    <form th:action="@{/login}" th:object="${form}" method="post">
-        <div class="error-message">
-             <p th:text="${error}">Ошибка</p>
-        </div>
-        <div>
-            <label>
-                <span>Email</span>
-                <input th:field="*{email}" type="text" maxlength="255">
-            </label>
-        </div>
-        <div>
-            <label>
-                <span>Пароль</span>
-                <input th:field="*{password}" type="password" maxlength="32">
-            </label>
-        </div>
-        <button type="submit">Войти</button>
-    </form>
+        <form th:action="@{/login}" th:object="${form}" method="post">
+            <div class="error-message">
+                 <p th:text="${error}">Ошибка</p>
+            </div>
+            <div>
+                <label>
+                    <span>Email</span>
+                    <input th:field="*{email}" type="text" maxlength="255">
+                </label>
+            </div>
+            <div>
+                <label>
+                    <span>Пароль</span>
+                    <input th:field="*{password}" type="password" maxlength="32">
+                </label>
+            </div>
+            <button type="submit">Войти</button>
+        </form>
 
-    <a th:href="@{/oauth2/authorization/google}">Войти через Google</a>
+        <a th:href="@{/oauth2/authorization/google}">Войти через Google</a>
 
-    <p>
-        Нет аккаунта? <a th:href="@{/register}">Зарегистрироваться</a>
-    </p>
-</div>
+        <p>
+            Нет аккаунта? <a th:href="@{/register}">Зарегистрироваться</a>
+        </p>
+    </div>
 </body>
 </html>

@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+    <div th:fragment="hub-card-group(card_group)">
+        <a th:href="@{/hub/cards?card_group_id=${card_group.id()}}" th:if="${card_group != null}">
+            <div class="card_group">
+                <h3 th:text="${card_group.name()}">card_group_name</h3>
+                <p th:text="${card_group.authorName()}">author_name</p>
+            </div>
+        </a>
+    </div>
+</body>
+</html>

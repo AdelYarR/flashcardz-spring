@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+    <div th:fragment="pagination(page, total_pages, input_text)">
+        <div class="pagination" th:with="current_page=${page != null ? page : 1}">
+            <a th:if="${current_page > 1}"
+               th:href="@{/hub/groups(page=${current_page - 1}, input_text=${input_text})}">
+                Предыдущая
+            </a>
+
+            <span class="current-page" th:text="${current_page}"></span>
+            <span>/</span>
+            <span th:text="${total_pages}"></span>
+
+            <a th:if="${current_page < total_pages}"
+               th:href="@{/hub/groups(page=${current_page + 1}, input_text=${input_text})}">
+                Следующая
+            </a>
+        </div>
+    </div>
+</body>
+</html>
